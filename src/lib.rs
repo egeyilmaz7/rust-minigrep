@@ -30,7 +30,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
     let results = if config.ignore_case {
-        search_case_sensetive(&config.query, &contents)
+        search_case_insensetive(&config.query, &contents)
     } else {
         search(&config.query, &contents)
     };
@@ -69,7 +69,7 @@ Trust me.";
 
         assert_eq!(
             vec!["Rust:", "Trust me."],
-            search_case_sensetive(query, contents)
+            search_case_insensetive(query, contents)
         );
     }
 }
@@ -86,7 +86,7 @@ pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     results
 }
 
-pub fn search_case_sensetive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
+pub fn search_case_insensetive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let query = query.to_lowercase();
     let mut results = Vec::new();
 
